@@ -1,0 +1,296 @@
+.interactive-pcb {
+  max-width: 100%;
+  margin: 2rem 0;
+}
+
+.pcb-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: visible;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(133, 148, 232, 0.1);
+}
+
+.pcb-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.3s ease;
+  border-radius: 24px;
+}
+
+.hotspot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.2s ease;
+}
+
+.hotspot-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--category-color);
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.hotspot-pulse {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--category-color);
+  opacity: 0;
+  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+.hotspot:hover .hotspot-dot,
+.hotspot.active .hotspot-dot {
+  transform: scale(1.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.hotspot:hover .hotspot-pulse,
+.hotspot.active .hotspot-pulse {
+  animation-duration: 1s;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+.component-info {
+  position: absolute;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 280px;
+  z-index: 1000;
+  border: 1px solid rgba(133, 148, 232, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+.component-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--category-color, #8594E8);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  border-radius: 0 12px 0 0;
+}
+
+.component-info h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0A0A0A;
+}
+
+.component-info p {
+  margin: 0 0 1.25rem 0;
+  color: #495057;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.component-category {
+  display: inline-block;
+  background: rgba(133, 148, 232, 0.1);
+  color: #8594E8;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pcb-legend {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(133, 148, 232, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.pcb-legend h4 {
+  margin: 0 0 1.25rem 0;
+  color: #0A0A0A;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.legend-items {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #495057;
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pcb-container {
+    max-width: 100%;
+  }
+
+  .component-info {
+    position: fixed;
+    top: 80px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+    z-index: 1001;
+    padding: 1.25rem;
+  }
+
+  .hotspot {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hotspot-dot {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+
+  .hotspot-pulse {
+    width: 14px;
+    height: 14px;
+    top: 3px;
+    left: 3px;
+  }
+
+  .legend-items {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hotspot {
+    width: 20px;
+    height: 20px;
+  }
+
+  .hotspot-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .hotspot-pulse {
+    width: 14px;
+    height: 14px;
+  }
+
+  .component-info {
+    padding: 1rem;
+  }
+}
+
+/* Ensure proper container sizing */
+.interactive-pcb {
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .hotspot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hotspot-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .hotspot-pulse {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Component hover boxes */
+.component-box {
+  position: absolute;
+  border: 2px solid #8594E8;
+  background-color: rgba(133, 148, 232, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 25;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.component-box.visible {
+  opacity: 0.7;
+  background-color: rgba(133, 148, 232, 0.3);
+}
+
+/* Accessibility */
+.hotspot:focus {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
+}
+
+.hotspot:focus .hotspot-dot {
+  transform: scale(1.5);
+}
