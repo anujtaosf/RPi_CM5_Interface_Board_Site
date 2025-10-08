@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
 import './InteractivePCB.css';
-import pcbImage from './pcb-layout.png';
+import pcbBackImage from './pcb-layout.png';
+import pcbFrontImage from './pcb-front.png';
 
 const InteractivePCB = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [hoveredComponent, setHoveredComponent] = useState(null);
 
-  const components = {
+  const frontComponents = {
+    'sd-card': {
+      name: 'SD Card Slot',
+      description: 'Micro SD card slot for flashing RPi',
+      position: { top: '61%', left: '27%' },
+      boxArea: { top: '49%', left: '19%', width: '17%', height: '26%' },
+      category: 'power'
+    },
+    'osl-website': {
+      name: 'OSL Website',
+      description: 'Links to the Open Source Leg website',
+      position: { top: '65%', left: '66%' },
+      boxArea: { top: '58%', left: '61.5%', width: '8.5%', height: '13%' },
+      category: 'power'
+    },
+    'cm5-connector': {
+      name: 'RPI CM5 Receptacle',
+      description: 'Connector for RPi CM5 module',
+      position: { top: '21%', left: '48%' },
+      boxArea: { top: '15%', left: '34%', width: '27%', height: '10%' },
+      category: 'main'
+    }
+  };
+
+  const backComponents = {
     // Communication
     'i2c2': {
       name: 'I2C-2',
@@ -169,92 +194,99 @@ const InteractivePCB = () => {
 
     // Special positioning for other bottom-right components
     if (markerTop > 50 && markerLeft > 50) {
-      // For components in bottom-right area, place popup to the left
       position.top = `${Math.max(5, boxTop - 10)}%`;
       position.left = `${Math.max(5, boxLeft - 35)}%`;
       return position;
     }
 
-    // If component is in the top half, place popup below it
     if (boxTop < 50) {
       position.top = `${boxTop + boxHeight + 5}%`;
     } else {
-      // If component is in bottom half, place popup above it
       position.top = `${Math.max(5, boxTop - 25)}%`;
     }
 
-    // If component is on the left side, place popup to the right
     if (boxLeft < 50) {
       position.left = `${Math.min(70, boxLeft + boxWidth + 5)}%`;
     } else {
-      // If component is on the right side, place popup to the left
       position.left = `${Math.max(5, boxLeft - 25)}%`;
     }
 
     return position;
   };
 
+  const renderPCBView = (components, image, label, viewId) => {
+    return (
+      <div className="pcb-view-section">
+        <h3 className="pcb-view-label">{label}</h3>
+        <div className="pcb-container" onClick={handleBackgroundClick}>
+          <img
+            src={image}
+            alt={label}
+            className="pcb-image"
+            onClick={handleBackgroundClick}
+          />
+
+          {Object.entries(components).map(([id, component]) => (
+            <div
+              key={`box-${viewId}-${id}`}
+              className={`component-box ${(hoveredComponent === `${viewId}-${id}` || selectedComponent === `${viewId}-${id}`) ? 'visible' : ''}`}
+              style={{
+                top: component.boxArea.top,
+                left: component.boxArea.left,
+                width: component.boxArea.width,
+                height: component.boxArea.height,
+                '--category-color': getCategoryColor(component.category)
+              }}
+            />
+          ))}
+
+          {/* Interactive hotspots */}
+          {Object.entries(components).map(([id, component]) => {
+            const fullId = `${viewId}-${id}`;
+            return (
+              <div
+                key={fullId}
+                className={`hotspot ${(activeComponent === fullId) ? 'active' : ''}`}
+                style={{
+                  top: component.position.top,
+                  left: component.position.left,
+                  '--category-color': getCategoryColor(component.category)
+                }}
+                onClick={(e) => handleComponentClick(fullId, e)}
+                onMouseEnter={() => handleComponentHover(fullId)}
+                onMouseLeave={handleComponentLeave}
+                title={component.name}
+              >
+                <div className="hotspot-dot"></div>
+                <div className="hotspot-pulse"></div>
+              </div>
+            );
+          })}
+
+          {/* Component info panel */}
+          {activeComponent && activeComponent.startsWith(viewId) && (
+            <div
+              className="component-info"
+              style={getPopupPosition(components[activeComponent.replace(`${viewId}-`, '')])}
+            >
+              <h3 style={{ color: getCategoryColor(components[activeComponent.replace(`${viewId}-`, '')].category) }}>
+                {components[activeComponent.replace(`${viewId}-`, '')].name}
+              </h3>
+              <p>{components[activeComponent.replace(`${viewId}-`, '')].description}</p>
+              <span className="component-category">
+                {components[activeComponent.replace(`${viewId}-`, '')].category.toUpperCase()}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="interactive-pcb" onClick={handleBackgroundClick}>
-      <div className="pcb-container" onClick={handleBackgroundClick}>
-        <img
-          src={pcbImage}
-          alt="RPi CM5 Interface Board PCB Layout"
-          className="pcb-image"
-          onClick={handleBackgroundClick}
-        />
-
-        {/* Hover boxes */}
-        {Object.entries(components).map(([id, component]) => (
-          <div
-            key={`box-${id}`}
-            className={`component-box ${(hoveredComponent === id || selectedComponent === id) ? 'visible' : ''}`}
-            style={{
-              top: component.boxArea.top,
-              left: component.boxArea.left,
-              width: component.boxArea.width,
-              height: component.boxArea.height,
-              '--category-color': getCategoryColor(component.category)
-            }}
-          />
-        ))}
-
-        {/* Interactive hotspots */}
-        {Object.entries(components).map(([id, component]) => (
-          <div
-            key={id}
-            className={`hotspot ${activeComponent === id ? 'active' : ''}`}
-            style={{
-              top: component.position.top,
-              left: component.position.left,
-              '--category-color': getCategoryColor(component.category)
-            }}
-            onClick={(e) => handleComponentClick(id, e)}
-            onMouseEnter={() => handleComponentHover(id)}
-            onMouseLeave={handleComponentLeave}
-            title={component.name}
-          >
-            <div className="hotspot-dot"></div>
-            <div className="hotspot-pulse"></div>
-          </div>
-        ))}
-
-        {/* Component info panel */}
-        {activeComponent && (
-          <div
-            className="component-info"
-            style={getPopupPosition(components[activeComponent])}
-          >
-            <h3 style={{ color: getCategoryColor(components[activeComponent].category) }}>
-              {components[activeComponent].name}
-            </h3>
-            <p>{components[activeComponent].description}</p>
-            <span className="component-category">
-              {components[activeComponent].category.toUpperCase()}
-            </span>
-          </div>
-        )}
-      </div>
+      {renderPCBView(frontComponents, pcbFrontImage, 'Front of Interface Board', 'front')}
+      {renderPCBView(backComponents, pcbBackImage, 'Back of Interface Board', 'back')}
     </div>
   );
 };

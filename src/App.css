@@ -247,19 +247,19 @@ body {
   text-align: center;
   margin-bottom: 3rem;
   border-radius: 24px;
+  border: 1px transparent;
   box-shadow: 0 8px 24px rgba(10, 10, 10, 0.15);
   position: relative;
   overflow: hidden;
 }
 
 .header::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: linear-gradient(90deg, var(--osl-mindaro) 0%, var(--osl-vista-blue) 100%);
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  height:12px; 
+  bottom:-1px;
+  background:linear-gradient(90deg, var(--osl-mindaro) 0%, var(--osl-vista-blue) 100%);
 }
 
 .header-content {
@@ -299,34 +299,41 @@ body {
 .section {
   margin-bottom: 3rem;
   padding: 2.5rem;
-  background: white;
+  padding-bottom: calc(2.5rem + 8px);
+  background: #fff;
+  border: 1px transparent;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(133, 148, 232, 0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
   position: relative;
+  overflow: hidden;
+
+  background-image: linear-gradient(90deg, var(--osl-vista-blue) 0%, var(--osl-mindaro) 100%);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 100% 8px;
 }
 
-
-.section::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--osl-vista-blue) 0%, var(--osl-mindaro) 100%);
-  border-radius: 0 0 16px 16px;
-}
 
 .section h2 {
   color: var(--osl-core-black);
   font-size: 2.25rem;
   font-weight: 700;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0;
   letter-spacing: -0.01em;
   width: 100%;
   display: block;
+}
+
+.pcb-version {
+  color: var(--osl-vista-blue);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .section h3 {
@@ -821,6 +828,30 @@ em {
 
 .toggle-section.building-section .toggle-header:hover {
   background: rgba(10, 10, 10, 0.08);
+}
+
+/* Mechanical Specifications Styling */
+.mechanical-specs-content {
+  margin-top: 1.5rem;
+}
+
+.specs-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(133, 148, 232, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.specs-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
 }
 
 /* Where to Buy Components Styling */

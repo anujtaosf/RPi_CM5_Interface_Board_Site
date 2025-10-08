@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import InteractivePCB from "./InteractivePCB";
+import mechanicalSpecs from "./mechanical_specs.png";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <IOPinsSection />
         <FeaturesSection />
         <QuickStart />
+        <MechanicalSpecifications />
         <HardwareRecommendations />
         <WhereToBuyComponents />
       </main>
@@ -51,6 +53,7 @@ function SystemOverview() {
   return (
     <section className="section osl-card" id="system-overview">
       <h2>Interactive PCB Layout</h2>
+      <p className="pcb-version">v1.0.0</p>
       <p>
         Click on the components below to learn more about each part of the
         interface board:
@@ -61,38 +64,62 @@ function SystemOverview() {
 }
 
 function PowerSection() {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <section className="section osl-card" id="power">
-      <h2>Power</h2>
-      <p>Power specifications and requirements for the interface board:</p>
+      <div className="quickstart-header">
+        <h2>Power</h2>
+        <button
+          className="expand-button"
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+        >
+          <span className={`expand-icon ${expanded ? "expanded" : ""}`}>▼</span>
+        </button>
+      </div>
 
-      <table className="power-table">
-        <thead>
-          <tr>
-            <th>Identifier</th>
-            <th>Connector</th>
-            <th>Input Power</th>
-            <th>Output Power</th>
-            <th>Purpose</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>J1</strong></td>
-            <td><strong>XT30</strong></td>
-            <td>15-60V</td>
-            <td>5V</td>
-            <td>Motor Power</td>
-          </tr>
-          <tr>
-            <td><strong>J2</strong></td>
-            <td><strong>USB-C</strong></td>
-            <td>-</td>
-            <td>5V @ 5A</td>
-            <td>RPi and Sensor Power</td>
-          </tr>
-        </tbody>
-      </table>
+      {expanded && (
+        <>
+          <p>Power specifications and requirements for the interface board:</p>
+
+          <table className="power-table">
+            <thead>
+              <tr>
+                <th>Identifier</th>
+                <th>Connector</th>
+                <th>Input Power</th>
+                <th>Output Power</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>J1</strong>
+                </td>
+                <td>
+                  <strong>XT30</strong>
+                </td>
+                <td>15-60V</td>
+                <td>5V</td>
+                <td>Motor Power</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>J2</strong>
+                </td>
+                <td>
+                  <strong>USB-C</strong>
+                </td>
+                <td>-</td>
+                <td>5V @ 5A</td>
+                <td>RPi and Sensor Power</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
     </section>
   );
 }
@@ -115,11 +142,6 @@ function IOPinsSection() {
 
       {expanded && (
         <>
-          <p>
-            Communication protocols and I/O connections available on the interface board.
-            All connections use Molex PicoClasp connectors unless otherwise noted.
-          </p>
-
           <table className="io-table">
             <thead>
               <tr>
@@ -132,42 +154,54 @@ function IOPinsSection() {
             </thead>
             <tbody>
               <tr>
-                <td><strong>I2C</strong></td>
+                <td>
+                  <strong>I2C</strong>
+                </td>
                 <td>Molex PicoClasp</td>
                 <td>I2C-2, I2C-3</td>
                 <td>4-pin</td>
                 <td>Serial communication</td>
               </tr>
               <tr>
-                <td><strong>SPI</strong></td>
+                <td>
+                  <strong>SPI</strong>
+                </td>
                 <td>Molex PicoClasp</td>
                 <td>SPI-1 (CS0, CS1, CS2)</td>
                 <td>8-pin</td>
                 <td>Serial communication</td>
               </tr>
               <tr>
-                <td><strong>UART</strong></td>
+                <td>
+                  <strong>UART</strong>
+                </td>
                 <td>Molex PicoClasp</td>
                 <td>UART-1, UART-2</td>
                 <td>4-pin</td>
                 <td>Serial communication</td>
               </tr>
               <tr>
-                <td><strong>CAN Bus</strong></td>
+                <td>
+                  <strong>CAN Bus</strong>
+                </td>
                 <td>Molex PicoClasp</td>
                 <td>CAN-0 via SPI-0 (CS0)</td>
                 <td>3-pin</td>
                 <td>Serial communication</td>
               </tr>
               <tr>
-                <td><strong>GPIO Headers</strong></td>
+                <td>
+                  <strong>GPIO Headers</strong>
+                </td>
                 <td>Pin Headers</td>
                 <td>GPIO 7, 22, 23, 24, 25, 27</td>
                 <td>8-pin</td>
                 <td>General-purpose I/O for debugging</td>
               </tr>
               <tr>
-                <td><strong>Fan Port</strong></td>
+                <td>
+                  <strong>Fan Port</strong>
+                </td>
                 <td>JST PH 2-pin</td>
                 <td>PWM controlled</td>
                 <td>2-pin</td>
@@ -177,16 +211,15 @@ function IOPinsSection() {
           </table>
 
           <p className="io-note">
-            <strong>Note:</strong> Pins may be remapped using RPi Device Tree Overlays
-            (typically in <code>/boot/config.txt</code>) to customize protocol parameters
-            and enable/disable specific chip selects.
+            <strong>Note:</strong> Pins may be remapped using RPi Device Tree
+            Overlays (typically in <code>/boot/config.txt</code>) to customize
+            protocol parameters and enable/disable specific chip selects.
           </p>
         </>
       )}
     </section>
   );
 }
-
 
 function FeaturesSection() {
   const [expanded, setExpanded] = useState(false);
@@ -214,7 +247,7 @@ function FeaturesSection() {
                   <ul>
                     <li>ON/OFF latching switch triggers safe OS shutdown</li>
                     <li>Cuts power to the RPi only after shutdown signal</li>
-                    <li>Sensors remain powered (always-on) ?</li>
+                    <li>Cuts power to sensors</li>
                   </ul>
                 </div>
                 <div className="feature-item">
@@ -275,6 +308,34 @@ function FeaturesSection() {
                     </li>
                   </ul>
                 </div>
+                <div className="feature-item">
+                  <h3>SD Card Slot</h3>
+                  <ul>
+                    <li>
+                      <strong>Description:</strong> Micro SD card slot
+                    </li>
+                    <li>
+                      <strong>Functionality:</strong> Flashing RPi CM5 "lite"
+                      module (without onboard storage), can also be used instead
+                      of jumping J3 headers
+                    </li>
+                  </ul>
+                </div>
+                <div className="feature-item">
+                  <h3>RTC</h3>
+                  <ul>
+                    <li>
+                      <strong>Description:</strong> Real-Time Clock
+                    </li>
+                    <li>
+                      <strong>Functionality:</strong> Timekeeping
+                    </li>
+                    <li>
+                      <strong>Implementation:</strong> Already enabled with
+                      power on.
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -314,8 +375,8 @@ function QuickStart() {
               <h3>Flashing</h3>
               <p>
                 A build needs to be flashed onto the compute module by jumping
-                the J3 headers. This will put the board into storage mode, so you can
-                flash the eMMC. Here is the{" "}
+                the J3 headers. This will put the board into storage mode, so
+                you can flash the eMMC. Here is the{" "}
                 <a
                   href="https://github.com/neurobionics/neurobionicspi"
                   target="_blank"
@@ -326,8 +387,12 @@ function QuickStart() {
                 .
               </p>
               <p>
-                Make sure to check the box <em>"Are you using the Neurobionics interface
-                board? If so, please check this box."</em> when flashing the image.
+                Make sure to check the box{" "}
+                <em>
+                  "Are you using the Neurobionics interface board? If so, please
+                  check this box."
+                </em>{" "}
+                when flashing the image.
               </p>
             </div>
           </div>
@@ -338,21 +403,30 @@ function QuickStart() {
               <h3>Turning On</h3>
               <ol>
                 <li>
-                  Connect interface board to the compute module and plug in power
+                  Connect interface board to the compute module and plug in
+                  power
                   <ul>
                     <li>The boards should overlap perfectly</li>
                     <li>
-                      The "5V" LED near the toggle switch should light up, followed by the "PWR" LED
+                      The "5V" LED near the toggle switch should light up,
+                      followed by the "PWR" LED
                     </li>
                   </ul>
                 </li>
                 <li>
-                  After a minute or two, you should receive an email with the RPi IP address
+                  After a minute or two, you should receive an email with the
+                  RPi IP address
                   <ul>
-                    <li>If you do not, check that you have correctly configured the build</li>
+                    <li>
+                      If you do not, check that you have correctly configured
+                      the build
+                    </li>
                   </ul>
                 </li>
-                <li>Log into the Pi with the IP address using a serial terminal tool.</li>
+                <li>
+                  Log into the Pi with the IP address using a serial terminal
+                  tool.
+                </li>
               </ol>
             </div>
           </div>
@@ -362,19 +436,53 @@ function QuickStart() {
             <div className="step-content">
               <h3>First Time Configuration</h3>
               <p>
-                The first time the RPi boots, the user will need to run an included bash
-                script in order to set up the <em>config.txt</em>. This script will automatically
-                restart the board upon completion.
+                The first time the RPi boots, the user will need to run an
+                included bash script in order to set up the <em>config.txt</em>.
+                This script will automatically restart the board upon
+                completion.
               </p>
             </div>
           </div>
-
         </div>
       )}
     </section>
   );
 }
 
+function MechanicalSpecifications() {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <section className="section osl-card" id="mechanical-specs">
+      <div className="quickstart-header">
+        <h2>Mechanical Specifications</h2>
+        <button
+          className="expand-button"
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+        >
+          <span className={`expand-icon ${expanded ? "expanded" : ""}`}>▼</span>
+        </button>
+      </div>
+
+      {expanded && (
+        <div className="mechanical-specs-content">
+          <p>
+            Mechanical dimensions and mounting specifications for the interface
+            board:
+          </p>
+          <div className="specs-image-container">
+            <img
+              src={mechanicalSpecs}
+              alt="Mechanical Specifications"
+              className="specs-image"
+            />
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
 
 function HardwareRecommendations() {
   const [expanded, setExpanded] = useState(false);
@@ -398,24 +506,49 @@ function HardwareRecommendations() {
             <div className="step-content">
               <h3>Cooling Your Board</h3>
               <ul>
-                <li><strong>Active cooling (fan):</strong> Use the 2-pin JST PH fan connector for PWM-controlled cooling. Recommended for continuous operation or high ambient temperatures.</li>
-                <li><strong>Passive cooling (heatsinks):</strong> Install heatsinks on the CM5 processor and power management ICs for improved thermal performance.</li>
-                <li><strong>Airflow consideration:</strong> Ensure adequate ventilation around the board, especially near heat-generating components.</li>
+                <li>
+                  <strong>Active cooling (fan):</strong> Use the 2-pin JST PH connector for fan cooling via PWM.
+                  Recommended for continuous operation or high ambient temperatures.
+                </li>
+                <li>
+                  <strong>Passive cooling (heatsinks):</strong> Install
+                  heatsinks on the CM5 processor and power management ICs for
+                  improved thermal performance.
+                </li>
+                <li>
+                  <strong>Airflow consideration:</strong> Ensure adequate
+                  ventilation around the board, especially near heat-generating
+                  components.
+                </li>
               </ul>
 
               <h3>Grounding Your Board</h3>
               <ul>
-                <li><strong>Chassis grounding:</strong> Connect the board ground to your system chassis or enclosure for EMI reduction and safety.</li>
-                <li><strong>Power supply grounding:</strong> Ensure proper grounding of both XT30 and USB-C power sources.</li>
-                <li><strong>Cable shielding:</strong> Use shielded cables for communication lines in high-noise environments.</li>
+                <li>
+                  <strong>PCB grounding:</strong> Use metal screws through
+                  mounting holes for grounding of PCB to chassis.
+                </li>
+                <li>
+                  <strong>Power supply grounding:</strong> Ensure proper
+                  grounding of both XT30 and USB-C power sources.
+                </li>
+                <li>
+                  <strong>Cable shielding:</strong> Use shielded cables for
+                  communication lines in high-noise environments.
+                </li>
               </ul>
 
               <h3>Strain-Relieving Your Wires</h3>
               <ul>
-                <li><strong>Connector retention:</strong> Use appropriate strain relief boots or cable ties near Molex PicoClasp connectors.</li>
-                <li><strong>Service loops:</strong> Provide adequate cable slack to prevent stress on solder joints during movement or vibration.</li>
-                <li><strong>Cable management:</strong> Route cables away from heat sources and moving parts. Use cable ties or clips to secure routing.</li>
-                <li><strong>Power cable protection:</strong> Ensure XT30 and USB-C power cables are properly secured to prevent disconnection.</li>
+                <li>
+                  <strong>Grouping Wires:</strong>Use appropriate strain relief
+                  cable ties or electrical tape to group 1mm wires connected to
+                  Molex PicoClasp connectors.
+                </li>
+                <li>
+                  <strong>Slack:</strong> Provide adequate cable slack to
+                  prevent stress on wires and connectors during movement.
+                </li>
               </ul>
             </div>
           </div>
