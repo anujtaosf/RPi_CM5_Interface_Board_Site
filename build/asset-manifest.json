@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/RPi_CM5_Interface_Board_Site/static/css/main.92ddabbb.css",
+    "main.js": "/RPi_CM5_Interface_Board_Site/static/js/main.25edbc86.js",
+    "static/js/453.2cf8ef01.chunk.js": "/RPi_CM5_Interface_Board_Site/static/js/453.2cf8ef01.chunk.js",
+    "static/media/pcb-layout.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-layout.11ef738b1dbca89aa44a.png",
+    "static/media/pcb-front.png": "/RPi_CM5_Interface_Board_Site/static/media/pcb-front.e76ac38e6a4939dafd5c.png",
+    "static/media/mechanical_specs.png": "/RPi_CM5_Interface_Board_Site/static/media/mechanical_specs.19dc4c122a255e6097c2.png",
+    "index.html": "/RPi_CM5_Interface_Board_Site/index.html",
+    "main.92ddabbb.css.map": "/RPi_CM5_Interface_Board_Site/static/css/main.92ddabbb.css.map",
+    "main.25edbc86.js.map": "/RPi_CM5_Interface_Board_Site/static/js/main.25edbc86.js.map",
+    "453.2cf8ef01.chunk.js.map": "/RPi_CM5_Interface_Board_Site/static/js/453.2cf8ef01.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92ddabbb.css",
+    "static/js/main.25edbc86.js"
+  ]
+}
