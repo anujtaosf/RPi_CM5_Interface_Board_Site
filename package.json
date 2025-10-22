@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "rpi-cm5-interface-board-site",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -41,5 +41,5 @@
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },
-  "homepage": "https://neurobionics.github.io/RPi_CM_interface_board/"
+  "homepage": "https://anujtaosf.github.io/RPi_CM5_Interface_Board_Site"
 }
