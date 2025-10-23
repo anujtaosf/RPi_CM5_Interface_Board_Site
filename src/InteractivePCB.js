@@ -139,7 +139,7 @@ const InteractivePCB = () => {
     },
     'usb-c': {
       name: 'USB-C Port',
-      description: 'USB-C connector',
+      description: 'USB-C data ports for high-speed data transfer between devices',
       position: { top: '35%', left: '18%' },
       boxArea: { top: '22%', left: '11%', width: '12%', height: '50%' },
       category: 'components'

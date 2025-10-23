@@ -83,14 +83,14 @@ function PowerSection() {
         <>
           <p>Power specifications and requirements for the interface board:</p>
 
+          <h3>Input Power</h3>
           <table className="power-table">
             <thead>
               <tr>
-                <th>Identifier</th>
+                <th>Designator</th>
                 <th>Connector</th>
-                <th>Input Power</th>
-                <th>Output Power</th>
-                <th>Purpose</th>
+                <th>Voltage (V)</th>
+                <th>Power (W)</th>
               </tr>
             </thead>
             <tbody>
@@ -101,9 +101,8 @@ function PowerSection() {
                 <td>
                   <strong>XT30</strong>
                 </td>
-                <td>15-60V</td>
-                <td>5V</td>
-                <td>Motor Power</td>
+                <td>15 - 60</td>
+                <td>26.3 - 27.8</td>
               </tr>
               <tr>
                 <td>
@@ -112,9 +111,36 @@ function PowerSection() {
                 <td>
                   <strong>USB-C</strong>
                 </td>
-                <td>-</td>
-                <td>5V @ 5A</td>
-                <td>RPi and Sensor Power</td>
+                <td>5</td>
+                <td>3.5 - 6</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div
+            style={{ marginTop: "0.5em", fontStyle: "italic", color: "#666" }}
+          >
+            **Do not use J7 or J8 for power input. These are for high speed data transfer.**
+          </div>
+
+          <h3>Output Power</h3>
+          <table className="power-table">
+            <thead>
+              <tr>
+                <th>Designator</th>
+                <th>Connector</th>
+                <th>Voltage (V)</th>
+                <th>Power (W)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>I2C-2/3, UART-1/2, SPI-1, J6</strong>
+                </td>
+                <td>Molex PicoClasp, 2x4 Header Pin</td>
+                <td>3.3</td>
+                <td>1</td>
               </tr>
             </tbody>
           </table>
@@ -507,8 +533,9 @@ function HardwareRecommendations() {
               <h3>Cooling Your Board</h3>
               <ul>
                 <li>
-                  <strong>Active cooling (fan):</strong> Use the 2-pin JST PH connector for fan cooling via PWM.
-                  Recommended for continuous operation or high ambient temperatures.
+                  <strong>Active cooling (fan):</strong> Use the 2-pin JST PH
+                  connector for fan cooling via PWM. Recommended for continuous
+                  operation or high ambient temperatures.
                 </li>
                 <li>
                   <strong>Passive cooling (heatsinks):</strong> Install
