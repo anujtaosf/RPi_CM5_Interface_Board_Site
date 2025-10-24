@@ -28,7 +28,7 @@ function Header() {
       <div className="header-content">
         <h1>Raspberry Pi Compute Module 5 Interface Board</h1>
         <p className="header-subtitle">
-          Compatible PCB for the Raspberry Pi Compute Module 5
+          Breakout board for the Raspberry Pi Compute Module 5
         </p>
       </div>
     </header>
@@ -41,9 +41,10 @@ function About() {
       <h2>About</h2>
       <p>
         The Interface Board is an add-on module designed to fit onto and power
-        the Raspberry Pi Compute Module 5. It is built and tested by researchers
-        at the University of Michigan's Neurobionics Lab, and is compliant with
-        all sensors and peripherals on the Open Source Leg.
+        the Raspberry Pi Compute Module 5 (RPi CM5). It is built and tested by
+        researchers at the University of Michigan's Neurobionics Lab, and
+        provides plug and play functionality for sensors and acuators across a
+        wide variety of robotics applications.
       </p>
     </section>
   );
@@ -55,8 +56,7 @@ function SystemOverview() {
       <h2>Interactive PCB Layout</h2>
       <p className="pcb-version">v1.0.0</p>
       <p>
-        Click on the components below to learn more about each part of the
-        interface board:
+        Click on the individual components to learn more their functionality:
       </p>
       <InteractivePCB />
     </section>
@@ -81,7 +81,7 @@ function PowerSection() {
 
       {expanded && (
         <>
-          <p>Power specifications and requirements for the interface board:</p>
+          <p>Input and output power specifications:</p>
 
           <h3>Input Power</h3>
           <table className="power-table">
@@ -106,7 +106,9 @@ function PowerSection() {
               </tr>
               <tr>
                 <td>
-                  <strong>J2</strong>
+                  <strong>
+                    J2<sup style={{ fontSize: "0.8em" }}>*</sup>
+                  </strong>
                 </td>
                 <td>
                   <strong>USB-C</strong>
@@ -120,30 +122,15 @@ function PowerSection() {
           <div
             style={{ marginTop: "0.5em", fontStyle: "italic", color: "#666" }}
           >
-            **Do not use J7 or J8 for power input. These are for high speed data transfer.**
+            *Do not use J7 or J8 for power input. These are for high speed data
+            transfer only.
           </div>
 
           <h3>Output Power</h3>
-          <table className="power-table">
-            <thead>
-              <tr>
-                <th>Designator</th>
-                <th>Connector</th>
-                <th>Voltage (V)</th>
-                <th>Power (W)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>I2C-2/3, UART-1/2, SPI-1, J6</strong>
-                </td>
-                <td>Molex PicoClasp, 2x4 Header Pin</td>
-                <td>3.3</td>
-                <td>1</td>
-              </tr>
-            </tbody>
-          </table>
+          <p>
+            {" "}
+            The combined output power across all connectors is 3.3 V at 1 W.
+          </p>
         </>
       )}
     </section>
@@ -171,75 +158,68 @@ function IOPinsSection() {
           <table className="io-table">
             <thead>
               <tr>
-                <th>Protocol/Function</th>
+                <th>Designator</th>
+                <th>Bus Details</th>
                 <th>Connector</th>
-                <th>Bus/Pins</th>
-                <th>Pin Count</th>
-                <th>Purpose</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <strong>I2C</strong>
+                  <strong>I2C-2,3</strong>
                 </td>
-                <td>Molex PicoClasp</td>
                 <td>I2C-2, I2C-3</td>
-                <td>4-pin</td>
-                <td>Serial communication</td>
+                <td>Molex PicoClasp, 4-Pin</td>
               </tr>
               <tr>
                 <td>
-                  <strong>SPI</strong>
+                  <strong>SPI-1</strong>
                 </td>
-                <td>Molex PicoClasp</td>
                 <td>SPI-1 (CS0, CS1, CS2)</td>
-                <td>8-pin</td>
-                <td>Serial communication</td>
+                <td>Molex PicoClasp, 8-Pin</td>
               </tr>
               <tr>
                 <td>
-                  <strong>UART</strong>
+                  <strong>UART-1,2</strong>
                 </td>
-                <td>Molex PicoClasp</td>
                 <td>UART-1, UART-2</td>
-                <td>4-pin</td>
-                <td>Serial communication</td>
+                <td>Molex PicoClasp, 4-Pin</td>
               </tr>
               <tr>
                 <td>
-                  <strong>CAN Bus</strong>
+                  <strong>CAN-1</strong>
                 </td>
-                <td>Molex PicoClasp</td>
-                <td>CAN-0 via SPI-0 (CS0)</td>
-                <td>3-pin</td>
-                <td>Serial communication</td>
+                <td>CAN-0 (on SPI-0, CS0)</td>
+                <td>Molex PicoClasp, 3-Pin</td>
               </tr>
               <tr>
                 <td>
-                  <strong>GPIO Headers</strong>
+                  <strong>FAN-1</strong>
                 </td>
-                <td>Pin Headers</td>
+                <td>Fan PWM, Fan Tacho</td>
+                <td>JST PH 4-pin</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>J6</strong>
+                </td>
                 <td>GPIO 7, 22, 23, 24, 25, 27</td>
-                <td>8-pin</td>
-                <td>General-purpose I/O for debugging</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Fan Port</strong>
-                </td>
-                <td>JST PH 2-pin</td>
-                <td>PWM controlled</td>
-                <td>2-pin</td>
-                <td>Cooling fan for RPi CM5</td>
+                <td>Header Pins, 8-Pin, Pitch - 2.54 mm</td>
               </tr>
             </tbody>
           </table>
 
           <p className="io-note">
-            <strong>Note:</strong> Pins may be remapped using RPi Device Tree
-            Overlays (typically in <code>/boot/config.txt</code>) to customize
-            protocol parameters and enable/disable specific chip selects.
+            <strong>Note:</strong> Pins can be remapped using RPi Device Tree
+            Overlays in <code>/boot/config.txt</code>. For more details follow{" "}
+            <a
+              href="https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              this link
+            </a>
+            .
           </p>
         </>
       )}
@@ -271,19 +251,18 @@ function FeaturesSection() {
                 <div className="feature-item">
                   <h3>Safe RPi Shutdown</h3>
                   <ul>
-                    <li>ON/OFF latching switch triggers safe OS shutdown</li>
-                    <li>Cuts power to the RPi only after shutdown signal</li>
-                    <li>Cuts power to sensors</li>
+                    <li>Pushbutton to safely shutdown and power on the Pi</li>
                   </ul>
                 </div>
                 <div className="feature-item">
                   <h3>Status LEDs</h3>
                   <ul>
                     <li>
-                      <strong>5V:</strong> RPi is powered
+                      <strong>5V:</strong> Indicates power on 5V line (RPi)
                     </li>
                     <li>
-                      <strong>3V3:</strong> Sensors are powered
+                      <strong>3V3:</strong> Indicates power on 3v3 Line
+                      (Sensors)
                     </li>
                     <li>
                       <strong>PWR:</strong> Power is being supplied to the
@@ -296,20 +275,13 @@ function FeaturesSection() {
                   </ul>
                 </div>
                 <div className="feature-item">
-                  <h3>Programmable LED</h3>
+                  <h3>Programmable RGB LED</h3>
                   <ul>
-                    <li>
-                      <strong>Description:</strong> Addressable RGB LED for
-                      custom signals and status indication
-                    </li>
                     <li>
                       <strong>Part Number:</strong> WS2812B-2020
                     </li>
                     <li>
-                      <strong>Control:</strong> Single-wire SPI
-                    </li>
-                    <li>
-                      <strong>Pin Number:</strong> GPIO 2
+                      <strong>Protocol:</strong> Single-wire SPI, GPIO 2
                     </li>
                     <li>
                       <strong>Example Implementation:</strong> [insert link
@@ -321,16 +293,10 @@ function FeaturesSection() {
                   <h3>IMU</h3>
                   <ul>
                     <li>
-                      <strong>Description:</strong> Inertial Measurement Unit
-                    </li>
-                    <li>
-                      <strong>Functionality:</strong> Motion/orientation sensing
-                    </li>
-                    <li>
                       <strong>Part Number:</strong> BHI260AP
                     </li>
                     <li>
-                      <strong>Communication:</strong> SPI Bus 0, Chip Select 2
+                      <strong>Protocol:</strong> SPI, SPI-0, CS-2
                     </li>
                   </ul>
                 </div>
@@ -338,28 +304,15 @@ function FeaturesSection() {
                   <h3>SD Card Slot</h3>
                   <ul>
                     <li>
-                      <strong>Description:</strong> Micro SD card slot
-                    </li>
-                    <li>
-                      <strong>Functionality:</strong> Flashing RPi CM5 "lite"
-                      module (without onboard storage), can also be used instead
-                      of jumping J3 headers
+                      <strong>Functionality:</strong> To be used with CM5 "lite"
+                      module (without onboard storage)
                     </li>
                   </ul>
                 </div>
                 <div className="feature-item">
-                  <h3>RTC</h3>
+                  <h3>Real-Time Clock</h3>
                   <ul>
-                    <li>
-                      <strong>Description:</strong> Real-Time Clock
-                    </li>
-                    <li>
-                      <strong>Functionality:</strong> Timekeeping
-                    </li>
-                    <li>
-                      <strong>Implementation:</strong> Already enabled with
-                      power on.
-                    </li>
+                    <li>Enables RTC on-board CM5.</li>
                   </ul>
                 </div>
               </div>
@@ -400,17 +353,16 @@ function QuickStart() {
             <div className="step-content">
               <h3>Flashing</h3>
               <p>
-                A build needs to be flashed onto the compute module by jumping
-                the J3 headers. This will put the board into storage mode, so
-                you can flash the eMMC. Here is the{" "}
+                Jump the J3 header pins to put the CM5 into storage mode and
+                flash the eMMC with the OS as described in,{" "}
                 <a
                   href="https://github.com/neurobionics/neurobionicspi"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  current Neurobionics Pi documentation.
+                  current Neurobionics Pi documentation to flash our custom OS
+                  image.
                 </a>
-                .
               </p>
               <p>
                 Make sure to check the box{" "}
