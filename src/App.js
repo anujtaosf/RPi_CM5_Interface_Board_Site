@@ -16,7 +16,6 @@ function App() {
         <QuickStart />
         <MechanicalSpecifications />
         <HardwareRecommendations />
-        <WhereToBuyComponents />
       </main>
     </div>
   );
@@ -161,6 +160,7 @@ function IOPinsSection() {
                 <th>Designator</th>
                 <th>Bus Details</th>
                 <th>Connector</th>
+                <th>Mating Part No.</th>
               </tr>
             </thead>
             <tbody>
@@ -170,6 +170,7 @@ function IOPinsSection() {
                 </td>
                 <td>I2C-2, I2C-3</td>
                 <td>Molex PicoClasp, 4-Pin</td>
+                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501" target="_blank" rel="noopener noreferrer">5013300400</a></td>
               </tr>
               <tr>
                 <td>
@@ -177,6 +178,7 @@ function IOPinsSection() {
                 </td>
                 <td>SPI-1 (CS0, CS1, CS2)</td>
                 <td>Molex PicoClasp, 8-Pin</td>
+                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300800/1531505" target="_blank" rel="noopener noreferrer">5013300800</a></td>
               </tr>
               <tr>
                 <td>
@@ -184,6 +186,7 @@ function IOPinsSection() {
                 </td>
                 <td>UART-1, UART-2</td>
                 <td>Molex PicoClasp, 4-Pin</td>
+                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501" target="_blank" rel="noopener noreferrer">5013300400</a></td>
               </tr>
               <tr>
                 <td>
@@ -191,6 +194,7 @@ function IOPinsSection() {
                 </td>
                 <td>CAN-0 (on SPI-0, CS0)</td>
                 <td>Molex PicoClasp, 3-Pin</td>
+                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300300/1531500" target="_blank" rel="noopener noreferrer">5013300300</a></td>
               </tr>
               <tr>
                 <td>
@@ -198,13 +202,14 @@ function IOPinsSection() {
                 </td>
                 <td>Fan PWM, Fan Tacho</td>
                 <td>JST PH 4-pin</td>
+                <td><a href="https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868" target="_blank" rel="noopener noreferrer">SHR-04V-S-B</a></td>
               </tr>
               <tr>
                 <td>
                   <strong>J6</strong>
                 </td>
                 <td>GPIO 7, 22, 23, 24, 25, 27</td>
-                <td>Header Pins, 8-Pin, Pitch - 2.54 mm</td>
+                <td>Header Pins, 8-Pin, 2.54 mm pitch</td>
               </tr>
             </tbody>
           </table>
@@ -499,102 +504,6 @@ function HardwareRecommendations() {
           </div>
         </div>
       )}
-    </section>
-  );
-}
-
-function WhereToBuyComponents() {
-  return (
-    <section className="section osl-card" id="where-to-buy">
-      <h2>Where to Buy Components</h2>
-      <p>
-        Essential components and connectors needed for your RPi CM5 Interface
-        Board:
-      </p>
-
-      <h3>Molex PicoClasp Connectors</h3>
-      <p>
-        The interface board uses Molex PicoClasp connectors for reliable
-        communication connections. You'll need the following configurations:
-      </p>
-
-      <div className="component-grid">
-        <div className="component-item">
-          <h4>3-Pin Connector</h4>
-          <p>
-            <strong>Part Number:</strong> 5013300300
-          </p>
-          <p>
-            <strong>Use:</strong> CAN connection
-          </p>
-          <a
-            href="https://www.digikey.com/en/products/detail/molex/5013300300/1531500?s=N4IgTCBcDaIDoBcAEBWADARgMxbW3aIAugL5A"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="buy-button"
-            title="Buy on DigiKey"
-          >
-            🛒
-          </a>
-        </div>
-
-        <div className="component-item">
-          <h4>4-Pin Connector</h4>
-          <p>
-            <strong>Part Number:</strong> 5013300400
-          </p>
-          <p>
-            <strong>Use:</strong> I2C and UART connections
-          </p>
-          <a
-            href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501?so=93491445&content=productdetail_US&mkt_tok=MDI4LVNYSy01MDcAAAGbe6wHzXiLLv4S4Tt8PSEnMJq4DEhLzRDmfzXk-usiogIoSKjuLDcc6_YReTEPQoQmsjvgytnIQU0H6iG3zLlGYPc5dNVZZqZCuwsbcn_-E"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="buy-button"
-            title="Buy on DigiKey"
-          >
-            🛒
-          </a>
-        </div>
-
-        <div className="component-item">
-          <h4>8-Pin Connector</h4>
-          <p>
-            <strong>Part Number:</strong> 5013300800
-          </p>
-          <p>
-            <strong>Use:</strong> SPI communication
-          </p>
-          <a
-            href="https://www.digikey.com/en/products/detail/molex/5013300800/1531505?s=N4IgTCBcDaIDoBcAEBWADARgMxbWgHHiALoC%2BQA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="buy-button"
-            title="Buy on DigiKey"
-          >
-            🛒
-          </a>
-        </div>
-
-        <div className="component-item">
-          <h4>4-Pin JST Connector</h4>
-          <p>
-            <strong>Part Number:</strong> SHR-04V-S-B
-          </p>
-          <p>
-            <strong>Use:</strong> Cooling fan connector
-          </p>
-          <a
-            href="https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="buy-button"
-            title="Buy on DigiKey"
-          >
-            🛒
-          </a>
-        </div>
-      </div>
     </section>
   );
 }
