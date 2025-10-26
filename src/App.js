@@ -170,7 +170,15 @@ function IOPinsSection() {
                 </td>
                 <td>I2C-2, I2C-3</td>
                 <td>Molex PicoClasp, 4-Pin</td>
-                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501" target="_blank" rel="noopener noreferrer">5013300400</a></td>
+                <td>
+                  <a
+                    href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    5013300400
+                  </a>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -178,7 +186,15 @@ function IOPinsSection() {
                 </td>
                 <td>SPI-1 (CS0, CS1, CS2)</td>
                 <td>Molex PicoClasp, 8-Pin</td>
-                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300800/1531505" target="_blank" rel="noopener noreferrer">5013300800</a></td>
+                <td>
+                  <a
+                    href="https://www.digikey.com/en/products/detail/molex/5013300800/1531505"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    5013300800
+                  </a>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -186,7 +202,15 @@ function IOPinsSection() {
                 </td>
                 <td>UART-1, UART-2</td>
                 <td>Molex PicoClasp, 4-Pin</td>
-                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501" target="_blank" rel="noopener noreferrer">5013300400</a></td>
+                <td>
+                  <a
+                    href="https://www.digikey.com/en/products/detail/molex/5013300400/1531501"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    5013300400
+                  </a>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -194,7 +218,15 @@ function IOPinsSection() {
                 </td>
                 <td>CAN-0 (on SPI-0, CS0)</td>
                 <td>Molex PicoClasp, 3-Pin</td>
-                <td><a href="https://www.digikey.com/en/products/detail/molex/5013300300/1531500" target="_blank" rel="noopener noreferrer">5013300300</a></td>
+                <td>
+                  <a
+                    href="https://www.digikey.com/en/products/detail/molex/5013300300/1531500"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    5013300300
+                  </a>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -202,7 +234,15 @@ function IOPinsSection() {
                 </td>
                 <td>Fan PWM, Fan Tacho</td>
                 <td>JST PH 4-pin</td>
-                <td><a href="https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868" target="_blank" rel="noopener noreferrer">SHR-04V-S-B</a></td>
+                <td>
+                  <a
+                    href="https://www.digikey.com/en/products/detail/jst-sales-america-inc/SHR-04V-S-B/759868"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    SHR-04V-S-B
+                  </a>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -234,6 +274,95 @@ function IOPinsSection() {
 
 function FeaturesSection() {
   const [expanded, setExpanded] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState(null);
+
+  const handleExpand = (isExpanded) => {
+    setExpanded(isExpanded);
+    if (isExpanded && !selectedFeature && features.length > 0) {
+      setSelectedFeature(features[0]);
+    }
+  };
+
+  const features = [
+    {
+      id: "shutdown",
+      title: "Safe RPi Shutdown",
+      icon: "⚡",
+      description: {
+        type: "simple",
+        content: "Pushbutton to safely shutdown and power on the Pi",
+      },
+    },
+    {
+      id: "status-leds",
+      title: "Status LEDs",
+      icon: "💡",
+      description: {
+        type: "list",
+        content: [
+          { label: "5V", desc: "Indicates power on the 5V rail" },
+          { label: "3V3", desc: "Indicates power on the 3.3V rail" },
+          {
+            label: "PWR",
+            desc: "The CM5 is receiving sufficient power and is turned on",
+          },
+          {
+            label: "ACT",
+            desc: "The flashing green light indicates the CM5 is running and/or accessing the OS",
+          },
+        ],
+      },
+    },
+    {
+      id: "rgb-led",
+      title: "Programmable RGB LED",
+      icon: "🌈",
+      description: {
+        type: "specs",
+        content: [
+          { label: "Part Number", value: "WS2812B-2020" },
+          { label: "Protocol", value: "Single-wire SPI, GPIO 2" },
+          { label: "Example Implementation", value: "[insert link here]" },
+        ],
+      },
+    },
+    {
+      id: "imu",
+      title: "IMU",
+      icon: "🔄",
+      description: {
+        type: "specs",
+        content: [
+          { label: "Part Number", value: "BHI260AP" },
+          { label: "Protocol", value: "SPI, SPI-0, CS-2" },
+        ],
+      },
+    },
+    {
+      id: "sd-card",
+      title: "SD Card Slot",
+      icon: "💾",
+      description: {
+        type: "specs",
+        content: [
+          {
+            label: "Functionality",
+            value:
+              'To be used with CM5 "lite" module (without onboard storage)',
+          },
+        ],
+      },
+    },
+    {
+      id: "rtc",
+      title: "Real-Time Clock",
+      icon: "🕒",
+      description: {
+        type: "simple",
+        content: "Enables RTC on-board CM5.",
+      },
+    },
+  ];
 
   return (
     <section className="section osl-card" id="features">
@@ -241,7 +370,7 @@ function FeaturesSection() {
         <h2>Features</h2>
         <button
           className="expand-button"
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => handleExpand(!expanded)}
           aria-expanded={expanded}
         >
           <span className={`expand-icon ${expanded ? "expanded" : ""}`}>▼</span>
@@ -249,80 +378,55 @@ function FeaturesSection() {
       </div>
 
       {expanded && (
-        <div className="quickstart-steps">
-          <div className="quickstart-step no-numbers">
-            <div className="step-content">
-              <div className="features-grid">
-                <div className="feature-item">
-                  <h3>Safe RPi Shutdown</h3>
-                  <ul>
-                    <li>Pushbutton to safely shutdown and power on the Pi</li>
-                  </ul>
-                </div>
-                <div className="feature-item">
-                  <h3>Status LEDs</h3>
-                  <ul>
-                    <li>
-                      <strong>5V:</strong> Indicates power on 5V line (RPi)
-                    </li>
-                    <li>
-                      <strong>3V3:</strong> Indicates power on 3v3 Line
-                      (Sensors)
-                    </li>
-                    <li>
-                      <strong>PWR:</strong> Power is being supplied to the
-                      interface board
-                    </li>
-                    <li>
-                      <strong>ACT:</strong> Activity indicator (flashes during
-                      access)
-                    </li>
-                  </ul>
-                </div>
-                <div className="feature-item">
-                  <h3>Programmable RGB LED</h3>
-                  <ul>
-                    <li>
-                      <strong>Part Number:</strong> WS2812B-2020
-                    </li>
-                    <li>
-                      <strong>Protocol:</strong> Single-wire SPI, GPIO 2
-                    </li>
-                    <li>
-                      <strong>Example Implementation:</strong> [insert link
-                      here]
-                    </li>
-                  </ul>
-                </div>
-                <div className="feature-item">
-                  <h3>IMU</h3>
-                  <ul>
-                    <li>
-                      <strong>Part Number:</strong> BHI260AP
-                    </li>
-                    <li>
-                      <strong>Protocol:</strong> SPI, SPI-0, CS-2
-                    </li>
-                  </ul>
-                </div>
-                <div className="feature-item">
-                  <h3>SD Card Slot</h3>
-                  <ul>
-                    <li>
-                      <strong>Functionality:</strong> To be used with CM5 "lite"
-                      module (without onboard storage)
-                    </li>
-                  </ul>
-                </div>
-                <div className="feature-item">
-                  <h3>Real-Time Clock</h3>
-                  <ul>
-                    <li>Enables RTC on-board CM5.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        <div className="features-container">
+          <div className="features-list">
+            {features.map((feature) => (
+              <button
+                key={feature.id}
+                className={`feature-button ${
+                  selectedFeature?.id === feature.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedFeature(feature)}
+              >
+                <span className="feature-icon">{feature.icon}</span>
+                {feature.title}
+              </button>
+            ))}
           </div>
+
+          {selectedFeature && (
+            <div className="feature-details">
+              <h3>
+                <span className="feature-icon">{selectedFeature.icon}</span>
+                {selectedFeature.title}
+              </h3>
+
+              {selectedFeature.description.type === "simple" && (
+                <p>{selectedFeature.description.content}</p>
+              )}
+
+              {selectedFeature.description.type === "list" && (
+                <ul>
+                  {selectedFeature.description.content.map((item, index) => (
+                    <li key={index}>
+                      <strong>{item.label}:</strong> {item.desc}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {selectedFeature.description.type === "specs" && (
+                <dl className="specs-list">
+                  {selectedFeature.description.content.map((spec, index) => (
+                    <div key={index} className="spec-item">
+                      <dt>{spec.label}:</dt>
+                      <dd>{spec.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+            </div>
+          )}
         </div>
       )}
     </section>
@@ -348,11 +452,10 @@ function QuickStart() {
       {expanded && (
         <div className="quickstart-steps">
           <ol className="numbered-step-list">
+            <li>Jump the J3 header pins to put the CM5 into storage mode</li>
             <li>
-              Jump the J3 header pins to put the CM5 into storage mode
-            </li>
-            <li>
-              Set up your host device (personal computer) and install rpiboot to detect the CM5 as a storage device by following{' '}
+              Set up your host device (personal computer) and install rpiboot to
+              detect the CM5 as a storage device by following{" "}
               <a
                 href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
                 target="_blank"
@@ -362,37 +465,43 @@ function QuickStart() {
               </a>
             </li>
             <li>
-              Install the CM5 on the interface board and connect to the host device using USB J2.
+              Install the CM5 on the interface board and connect to the host
+              device using USB J2.
             </li>
             <li>
-              Run rpiboot following{' '}
+              Run rpiboot following{" "}
               <a
                 href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 these instructions
-              </a>{' '}
-              and after a few seconds, the CM5 should be detected as a mass-storage device.
+              </a>{" "}
+              and after a few seconds, the CM5 should be detected as a
+              mass-storage device.
             </li>
             <li>
-              Flash an operating system image using an imaging tool like{' '}
+              Flash an operating system image using an imaging tool like{" "}
               <a
                 href="https://www.raspberrypi.com/software/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Raspberry Pi Imager
-              </a>.
-              We highly recommend using the{' '}
+              </a>
+              . We highly recommend using the{" "}
               <a
                 href="https://github.com/neurobionics/robot-ci"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Robot-CI image
-              </a>{' '}
-              by the Neurobionics Lab that auto-configures the peripheral ports to function with the interface board. Please follow the instructions in the repository descriptions to generate this image, and make sure to check the Are you using the Neurobionics Interface Board checkbox.
+              </a>{" "}
+              by the Neurobionics Lab that auto-configures the peripheral ports
+              to function with the interface board. Please follow the
+              instructions in the repository descriptions to generate this
+              image, and make sure to check the Are you using the Neurobionics
+              Interface Board checkbox.
             </li>
           </ol>
         </div>
@@ -494,7 +603,7 @@ function HardwareRecommendations() {
               <h3>Strain-Relieving Your Wires</h3>
               <ul>
                 <li>
-                  <strong>Grouping Wires:</strong>Use appropriate strain relief
+                  <strong>Grouping Wires:</strong> Use appropriate strain relief
                   cable ties or electrical tape to group 1mm wires connected to
                   Molex PicoClasp connectors. Proper strain relieving of
                   connector wires will ensure signal continuity and integrity.
