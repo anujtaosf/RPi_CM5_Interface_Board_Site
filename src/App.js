@@ -330,7 +330,7 @@ function QuickStart() {
   return (
     <section className="section osl-card" id="quick-start">
       <div className="quickstart-header">
-        <h2>Quick Start</h2>
+        <h2>Flashing the CM5</h2>
         <button
           className="expand-button"
           onClick={() => setExpanded(!expanded)}
@@ -342,85 +342,54 @@ function QuickStart() {
 
       {expanded && (
         <div className="quickstart-steps">
-          <div className="quickstart-step no-numbers">
-            <div className="step-content">
-              <h3>Software Setup Steps</h3>
-            </div>
-          </div>
-
-          <div className="quickstart-step">
-            <div className="step-number">1</div>
-            <div className="step-content">
-              <h3>Flashing</h3>
-              <p>
-                Jump the J3 header pins to put the CM5 into storage mode and
-                flash the eMMC with the OS as described in,{" "}
-                <a
-                  href="https://github.com/neurobionics/neurobionicspi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  current Neurobionics Pi documentation to flash our custom OS
-                  image.
-                </a>
-              </p>
-              <p>
-                Make sure to check the box{" "}
-                <em>
-                  "Are you using the Neurobionics interface board? If so, please
-                  check this box."
-                </em>{" "}
-                when flashing the image.
-              </p>
-            </div>
-          </div>
-
-          <div className="quickstart-step">
-            <div className="step-number">2</div>
-            <div className="step-content">
-              <h3>Turning On</h3>
-              <ol>
-                <li>
-                  Connect interface board to the compute module and plug in
-                  power
-                  <ul>
-                    <li>The boards should overlap perfectly</li>
-                    <li>
-                      The "5V" LED near the toggle switch should light up,
-                      followed by the "PWR" LED
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  After a minute or two, you should receive an email with the
-                  RPi IP address
-                  <ul>
-                    <li>
-                      If you do not, check that you have correctly configured
-                      the build
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  Log into the Pi with the IP address using a serial terminal
-                  tool.
-                </li>
-              </ol>
-            </div>
-          </div>
-
-          <div className="quickstart-step">
-            <div className="step-number">3</div>
-            <div className="step-content">
-              <h3>First Time Configuration</h3>
-              <p>
-                The first time the RPi boots, the user will need to run an
-                included bash script in order to set up the <em>config.txt</em>.
-                This script will automatically restart the board upon
-                completion.
-              </p>
-            </div>
-          </div>
+          <ol className="numbered-step-list">
+            <li>
+              Jump the J3 header pins to put the CM5 into storage mode
+            </li>
+            <li>
+              Set up your host device (personal computer) and install rpiboot to detect the CM5 as a storage device by following{' '}
+              <a
+                href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                these instructions
+              </a>
+            </li>
+            <li>
+              Install the CM5 on the interface board and connect to the host device using USB J2.
+            </li>
+            <li>
+              Run rpiboot following{' '}
+              <a
+                href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                these instructions
+              </a>{' '}
+              and after a few seconds, the CM5 should be detected as a mass-storage device.
+            </li>
+            <li>
+              Flash an operating system image using an imaging tool like{' '}
+              <a
+                href="https://www.raspberrypi.com/software/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Raspberry Pi Imager
+              </a>.
+              We highly recommend using the{' '}
+              <a
+                href="https://github.com/neurobionics/robot-ci"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Robot-CI image
+              </a>{' '}
+              by the Neurobionics Lab that auto-configures the peripheral ports to function with the interface board. Please follow the instructions in the repository descriptions to generate this image, and make sure to check the Are you using the Neurobionics Interface Board checkbox.
+            </li>
+          </ol>
         </div>
       )}
     </section>
@@ -522,11 +491,8 @@ function HardwareRecommendations() {
                 <li>
                   <strong>Grouping Wires:</strong>Use appropriate strain relief
                   cable ties or electrical tape to group 1mm wires connected to
-                  Molex PicoClasp connectors.
-                </li>
-                <li>
-                  <strong>Slack:</strong> Provide adequate cable slack to
-                  prevent stress on wires and connectors during movement.
+                  Molex PicoClasp connectors. Proper strain relieving of
+                  connector wires will ensure signal continuity and integrity.
                 </li>
               </ul>
             </div>

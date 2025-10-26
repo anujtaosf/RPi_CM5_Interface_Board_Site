@@ -1123,3 +1123,73 @@ em {
     padding: 0 1rem 1rem 1rem;
   }
 }
+
+/* Numbered Step Styles */
+.numbered-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  counter-reset: step;
+}
+
+.numbered-step-list li {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 1.5rem;
+  counter-increment: step;
+}
+
+.numbered-step-list li:before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--osl-vista-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(133, 148, 232, 0.3);
+}
+
+/* Superscript Star */
+.star-superscript {
+  color: var(--osl-vista-blue);
+  font-weight: bold;
+  font-size: 0.8em;
+  vertical-align: super;
+  text-decoration: none;
+  margin-left: 2px;
+  line-height: 0;
+}
+
+/* Input/Output Power Section Styles */
+.power-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.power-section {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(133, 148, 232, 0.1);
+  overflow: hidden;
+}
+
+.power-section h3 {
+  margin: 0;
+  padding: 1rem 1.5rem;
+  background: var(--osl-vista-blue);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
