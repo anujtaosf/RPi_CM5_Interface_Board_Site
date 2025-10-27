@@ -39,11 +39,11 @@ function About() {
     <section className="section osl-card" id="about">
       <h2>About</h2>
       <p>
-        The Interface Board is an add-on module for the Raspberry Pi 
-        Compute Module 5 (RPi CM5) that is designed to provide plug 
-        and play functionality for sensors and actuators across a
-        wide variety of robotics applications. It is built and tested 
-        by researchers at the University of Michigan's Neurobionics Lab.
+        The Interface Board is an add-on module for the Raspberry Pi Compute
+        Module 5 (RPi CM5) that is designed to provide plug and play
+        functionality for sensors and actuators across a wide variety of
+        robotics applications. It is built and tested by researchers at the
+        University of Michigan's Neurobionics Lab.
       </p>
     </section>
   );
@@ -112,8 +112,8 @@ function PowerSection() {
                 <td>
                   <strong>USB-C</strong>
                 </td>
-                <td>5</td>
-                <td>3.5 - 6</td>
+                <td></td>
+                <td>26.5</td>
               </tr>
             </tbody>
           </table>
@@ -121,14 +121,15 @@ function PowerSection() {
           <div
             style={{ marginTop: "0.5em", fontStyle: "italic", color: "#666" }}
           >
-            *Do not use J7 or J8 USB-C ports for power input. These are for high speed data
-            transfer only.
+            *Do not use J7 or J8 USB-C ports for power input. These are for high
+            speed data transfer only.
           </div>
 
           <h3>Output</h3>
           <p>
             {" "}
-            The peripheral connectors can provide a combined power output of 1 W at 3.3 V.
+            The peripheral connectors can provide a combined power output of 1 W
+            at 3.3 V.
           </p>
         </>
       )}
@@ -256,7 +257,8 @@ function IOPinsSection() {
 
           <p className="io-note">
             <strong>Note:</strong> Pins can be remapped using RPi Device Tree
-            Overlays in <code>/boot/firmware/config.txt</code>. For more details, refer to this{" "}
+            Overlays in <code>/boot/firmware/config.txt</code>. For more
+            details, refer to this{" "}
             <a
               href="https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README"
               target="_blank"
@@ -345,7 +347,7 @@ function FeaturesSection() {
       description: {
         type: "simple",
         content: 'To be used with CM5 "lite" module (without onboard storage)',
-          },
+      },
     },
     {
       id: "rtc",
@@ -448,8 +450,9 @@ function QuickStart() {
           <ol className="numbered-step-list">
             <li>Jump the J3 header pins to put the CM5 into storage mode</li>
             <li>
-              Set up your host device (personal computer) and install <code>rpiboot</code> to
-              detect the CM5 as a storage device by following these{" "}
+              Set up your host device (personal computer) and install{" "}
+              <code>rpiboot</code> to detect the CM5 as a storage device by
+              following these{" "}
               <a
                 href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
                 target="_blank"
@@ -494,8 +497,8 @@ function QuickStart() {
               by the Neurobionics Lab that auto-configures the peripheral ports
               to function with the interface board. Please follow the
               instructions in the repository descriptions to generate this
-              image, and make sure to check the Are you using the Neurobionics
-              Interface Board checkbox.
+              image, and make sure to check the <em>Are you using the Neurobionics
+              Interface Board</em> checkbox.
             </li>
           </ol>
         </div>
@@ -559,50 +562,25 @@ function HardwareRecommendations() {
         <div className="quickstart-steps">
           <div className="quickstart-step no-numbers">
             <div className="step-content">
-              <h3>Cooling Your Board</h3>
-              <ul>
-                <li>
-                  <strong>Active cooling (fan):</strong> Use the 4-pin JST PH
-                  connector for fan cooling via PWM. Recommended for continuous
-                  operation or high ambient temperatures.
-                </li>
-                <li>
-                  <strong>Passive cooling (heatsinks):</strong> Install
-                  heatsinks on the CM5 processor and power management ICs for
-                  improved thermal performance.
-                </li>
-                <li>
-                  <strong>Airflow consideration:</strong> Ensure adequate
-                  ventilation around the board, especially near heat-generating
-                  components.
-                </li>
-              </ul>
+              <h3>Cooling</h3>
+              <p>
+                Since the RPi CM5 tends to run hotter than the standard RPi 5,
+                we strongly recommend using active cooling (via the FAN-1 port)
+                or a passive heatsink, along with ensuring adequate ventilation.
+              </p>
 
-              <h3>Grounding Your Board</h3>
-              <ul>
-                <li>
-                  <strong>PCB grounding:</strong> Use metal screws through
-                  mounting holes for grounding of PCB to chassis.
-                </li>
-                <li>
-                  <strong>Power supply grounding:</strong> Ensure proper
-                  grounding of both XT30 and USB-C power sources.
-                </li>
-                <li>
-                  <strong>Cable shielding:</strong> Use shielded cables for
-                  communication lines in high-noise environments.
-                </li>
-              </ul>
+              <h3>Grounding</h3>
+              <p>
+                For improved noise immunity in high-interference environments,
+                use shielded cables for sensors and ground the interface board
+                to the hardware chassis.
+              </p>
 
-              <h3>Strain-Relieving Your Wires</h3>
-              <ul>
-                <li>
-                  <strong>Grouping Wires:</strong> Use appropriate strain relief
-                  cable ties or electrical tape to group 1mm wires connected to
-                  Molex PicoClasp connectors. Proper strain relieving of
-                  connector wires will ensure signal continuity and integrity.
-                </li>
-              </ul>
+              <h3>Strain Relieving</h3>
+              <p>
+                Provide adequate strain relief on all wiring to reduce
+                mechanical stress and maintain signal integrity.
+              </p>
             </div>
           </div>
         </div>
