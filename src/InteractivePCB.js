@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './InteractivePCB.css';
 import pcbBackImage from './pcb-layout.png';
 import pcbFrontImage from './pcb-front.png';
+import i2c2_pinout from './I2C2_pinout.png';
+import i2c3_pinout from './I2C3_pinout.png';
 
 const InteractivePCB = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -35,14 +37,28 @@ const InteractivePCB = () => {
     // Communication
     'i2c2': {
       name: 'I2C-2',
-      description: 'I2C bus 2 with Molex Picoclasp connector',
+      description: (
+        <>
+          <p>I2C bus 2 with Molex Picoclasp connector</p>
+          <div className="component-pinout">
+            <img src={i2c2_pinout} alt="I2C-2 Pinout" className="pinout-image" />
+          </div>
+        </>
+      ),
       position: { top: '17%', left: '55%' },
       boxArea: { top: '10%', left: '49%', width: '11%', height: '12%' },
       category: 'communication'
     },
     'i2c3': {
       name: 'I2C-3',
-      description: 'I2C bus 3 with Molex Picoclasp connector',
+      description: (
+        <>
+          <p>I2C bus 3 with Molex Picoclasp connector</p>
+          <div className="component-pinout">
+            <img src={i2c3_pinout} alt="I2C-3 Pinout" className="pinout-image" />
+          </div>
+        </>
+      ),
       position: { top: '31%', left: '59%' },
       boxArea: { top: '25%', left: '53.5%', width: '11%', height: '12%' },
       category: 'communication'

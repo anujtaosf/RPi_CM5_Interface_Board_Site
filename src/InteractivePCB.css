@@ -313,3 +313,36 @@
 .hotspot:focus .hotspot-dot {
   transform: scale(1.5);
 }
+
+.component-pinout {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: rgba(133, 148, 232, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(133, 148, 232, 0.1);
+}
+
+.pinout-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+/* Component info container */
+.component-info {
+  max-width: 280px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure text remains readable at larger sizes */
+.component-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.component-info p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
