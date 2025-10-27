@@ -39,11 +39,11 @@ function About() {
     <section className="section osl-card" id="about">
       <h2>About</h2>
       <p>
-        The Interface Board is an add-on module designed to fit onto and power
-        the Raspberry Pi Compute Module 5 (RPi CM5). It is built and tested by
-        researchers at the University of Michigan's Neurobionics Lab, and
-        provides plug and play functionality for sensors and acuators across a
-        wide variety of robotics applications.
+        The Interface Board is an add-on module for the Raspberry Pi 
+        Compute Module 5 (RPi CM5) that is designed to provide plug 
+        and play functionality for sensors and actuators across a
+        wide variety of robotics applications. It is built and tested 
+        by researchers at the University of Michigan's Neurobionics Lab.
       </p>
     </section>
   );
@@ -82,7 +82,7 @@ function PowerSection() {
         <>
           <p>Input and output power specifications:</p>
 
-          <h3>Input Power</h3>
+          <h3>Input</h3>
           <table className="power-table">
             <thead>
               <tr>
@@ -121,14 +121,14 @@ function PowerSection() {
           <div
             style={{ marginTop: "0.5em", fontStyle: "italic", color: "#666" }}
           >
-            *Do not use J7 or J8 for power input. These are for high speed data
+            *Do not use J7 or J8 USB-C ports for power input. These are for high speed data
             transfer only.
           </div>
 
-          <h3>Output Power</h3>
+          <h3>Output</h3>
           <p>
             {" "}
-            The combined output power across all connectors is 3.3 V at 1 W.
+            The peripheral connectors can provide a combined power output of 1 W at 3.3 V.
           </p>
         </>
       )}
@@ -256,7 +256,7 @@ function IOPinsSection() {
 
           <p className="io-note">
             <strong>Note:</strong> Pins can be remapped using RPi Device Tree
-            Overlays in <code>/boot/config.txt</code>. For more details follow{" "}
+            Overlays in <code>/boot/firmware/config.txt</code>. For more details, refer to this{" "}
             <a
               href="https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README"
               target="_blank"
@@ -321,7 +321,7 @@ function FeaturesSection() {
         type: "specs",
         content: [
           { label: "Part Number", value: "WS2812B-2020" },
-          { label: "Protocol", value: "Single-wire SPI, GPIO 2" },
+          { label: "Protocol", value: "Single-wire SPI (GPIO 2)" },
           { label: "Example Implementation", value: "[insert link here]" },
         ],
       },
@@ -334,7 +334,7 @@ function FeaturesSection() {
         type: "specs",
         content: [
           { label: "Part Number", value: "BHI260AP" },
-          { label: "Protocol", value: "SPI, SPI-0, CS-2" },
+          { label: "Protocol", value: "SPI (SPI-0, CS-2)" },
         ],
       },
     },
@@ -343,15 +343,9 @@ function FeaturesSection() {
       title: "SD Card Slot",
       icon: "💾",
       description: {
-        type: "specs",
-        content: [
-          {
-            label: "Functionality",
-            value:
-              'To be used with CM5 "lite" module (without onboard storage)',
+        type: "simple",
+        content: 'To be used with CM5 "lite" module (without onboard storage)',
           },
-        ],
-      },
     },
     {
       id: "rtc",
@@ -359,7 +353,7 @@ function FeaturesSection() {
       icon: "🕒",
       description: {
         type: "simple",
-        content: "Enables RTC on-board CM5.",
+        content: "Enables RTC on-board the RPi CM5.",
       },
     },
   ];
@@ -454,8 +448,8 @@ function QuickStart() {
           <ol className="numbered-step-list">
             <li>Jump the J3 header pins to put the CM5 into storage mode</li>
             <li>
-              Set up your host device (personal computer) and install rpiboot to
-              detect the CM5 as a storage device by following{" "}
+              Set up your host device (personal computer) and install <code>rpiboot</code> to
+              detect the CM5 as a storage device by following these{" "}
               <a
                 href="https://www.raspberrypi.com/documentation/computers/compute-module.html#set-up-the-host-device"
                 target="_blank"
@@ -568,7 +562,7 @@ function HardwareRecommendations() {
               <h3>Cooling Your Board</h3>
               <ul>
                 <li>
-                  <strong>Active cooling (fan):</strong> Use the 2-pin JST PH
+                  <strong>Active cooling (fan):</strong> Use the 4-pin JST PH
                   connector for fan cooling via PWM. Recommended for continuous
                   operation or high ambient temperatures.
                 </li>
