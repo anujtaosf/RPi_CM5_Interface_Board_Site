@@ -101,7 +101,7 @@ function PowerSection() {
                   <strong>XT30</strong>
                 </td>
                 <td>15 - 60</td>
-                <td>26.3 - 27.8</td>
+                <td>30.2</td>
               </tr>
               <tr>
                 <td>
@@ -112,7 +112,7 @@ function PowerSection() {
                 <td>
                   <strong>USB-C</strong>
                 </td>
-                <td></td>
+                <td>5</td>
                 <td>26.5</td>
               </tr>
             </tbody>
@@ -358,6 +358,19 @@ function FeaturesSection() {
         content: "Enables RTC on-board the RPi CM5.",
       },
     },
+    {
+      id: "tp",
+      title: "Test Points",
+      icon: "🧪",
+      description: {
+        type: "specs",
+        content: [
+          "Use the GND pin on J3 when measuring voltages at test points.",
+          { label: "TP1", value: "3.3V rail" },
+          { label: "TP2", value: "5V rail" },
+        ],
+      },
+    },
   ];
 
   return (
@@ -413,12 +426,18 @@ function FeaturesSection() {
 
               {selectedFeature.description.type === "specs" && (
                 <dl className="specs-list">
-                  {selectedFeature.description.content.map((spec, index) => (
-                    <div key={index} className="spec-item">
-                      <dt>{spec.label}:</dt>
-                      <dd>{spec.value}</dd>
-                    </div>
-                  ))}
+                  {selectedFeature.description.content.map((spec, index) =>
+                    typeof spec === "string" ? (
+                      <p key={index} className="spec-note">
+                        {spec}
+                      </p>
+                    ) : (
+                      <div key={index} className="spec-item">
+                        <dt>{spec.label}:</dt>
+                        <dd>{spec.value}</dd>
+                      </div>
+                    )
+                  )}
                 </dl>
               )}
             </div>

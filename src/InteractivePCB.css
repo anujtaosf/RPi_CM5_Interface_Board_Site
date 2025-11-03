@@ -320,6 +320,8 @@
   background: rgba(133, 148, 232, 0.05);
   border-radius: 8px;
   border: 1px solid rgba(133, 148, 232, 0.1);
+  position: relative;
+  cursor: pointer;
 }
 
 .pinout-image {
@@ -327,6 +329,55 @@
   height: auto;
   border-radius: 4px;
   display: block;
+  transition: filter 0.2s ease;
+}
+
+.component-pinout:hover .pinout-image {
+  filter: brightness(0.95);
+}
+
+.enlarge-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+.enlarge-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #8594E8;
+}
+
+.enlarged-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.enlarged-image {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* Component info container */

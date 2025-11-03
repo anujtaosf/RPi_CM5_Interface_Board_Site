@@ -575,6 +575,12 @@ body {
   margin: 0.5rem 0 0 0;
   padding: 0;
 }
+.spec-note {
+  font-style: italic;
+  color: var(--osl-text-medium);
+  margin: 0.25rem 0 0.75rem 0;
+  display: block;
+}
 
 .spec-item {
   display: flex;
@@ -1126,33 +1132,17 @@ em {
     height: 50px;
   }
 
-  .power-table {
-    font-size: 0.9rem;
-  }
-
-  .power-table th,
-  .power-table td {
-    padding: 0.75rem 1rem;
-  }
-
-  .power-table th:nth-child(1),
-  .power-table th:nth-child(2),
-  .power-table th:nth-child(3),
-  .power-table th:nth-child(4),
-  .power-table th:nth-child(5) {
-    width: auto;
-  }
-
+  
   .power-table,
   .io-table {
     overflow-x: auto;
     display: block;
     white-space: nowrap;
+    font-size: 0.9rem;
   }
-
-  .power-table thead,
   .power-table tbody,
   .power-table tr,
+  .power-table thead,
   .io-table thead,
   .io-table tbody,
   .io-table tr {
@@ -1160,16 +1150,20 @@ em {
     width: 100%;
     table-layout: fixed;
   }
-
-  .io-table {
-    font-size: 0.9rem;
-  }
-
+  
+  .power-table th,
+  .power-table td,
   .io-table th,
   .io-table td {
     padding: 0.75rem 1rem;
   }
 
+  .power-table td:first-child,
+  .power-table td:nth-child(2),
+  .power-table td:nth-child(3),
+  .power-table td:nth-child(4) {
+    text-align: left;
+  }
   .io-table th:nth-child(1),
   .io-table th:nth-child(2),
   .io-table th:nth-child(3),

@@ -4,31 +4,39 @@ import pcbBackImage from './pcb-layout.png';
 import pcbFrontImage from './pcb-front.png';
 import i2c2_pinout from './I2C2_pinout.png';
 import i2c3_pinout from './I2C3_pinout.png';
+import uart1_pinout from './UART1_pinout.png';
+import uart2_pinout from './UART2_pinout.png';
+import spi_pinout from './SPI1_pinout.png';
+import can0_pinout from './CAN0_pinout.png';
+import GPIOheaders_pinout from './J6_pinout.png';
+import fan_pinout from './FAN_pinout.png';
+import rpiboot_pinout from './RPIBOOT_pinout.png';
 
 const InteractivePCB = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
   const [hoveredComponent, setHoveredComponent] = useState(null);
+  const [enlargedImage, setEnlargedImage] = useState(null);
 
   const frontComponents = {
     'sd-card': {
       name: 'SD Card Slot',
       description: 'Micro SD card slot for flashing RPi',
-      position: { top: '61%', left: '27%' },
-      boxArea: { top: '49%', left: '19%', width: '17%', height: '26%' },
+      position: { top: '68%', left: '14%' },
+      boxArea: { top: '49%', left: '2%', width: '25%', height: '34%' },
       category: 'power'
     },
     'osl-website': {
       name: 'OSL Website',
       description: 'Links to the Open Source Leg website',
-      position: { top: '65%', left: '66%' },
-      boxArea: { top: '58%', left: '61.5%', width: '8.5%', height: '13%' },
+      position: { top: '71%', left: '75%' },
+      boxArea: { top: '61%', left: '68%', width: '13.5%', height: '18.5%' },
       category: 'power'
     },
     'cm5-connector': {
       name: 'RPI CM5 Receptacle',
       description: 'Connector for RPi CM5 module',
-      position: { top: '21%', left: '48%' },
-      boxArea: { top: '15%', left: '34%', width: '27%', height: '10%' },
+      position: { top: '10%', left: '47%' },
+      boxArea: { top: '2%', left: '24.5%', width: '42%', height: '15%' },
       category: 'main'
     }
   };
@@ -40,13 +48,24 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>I2C bus 2 with Molex Picoclasp connector</p>
-          <div className="component-pinout">
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(i2c2_pinout);
+            }}
+          >
             <img src={i2c2_pinout} alt="I2C-2 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
           </div>
         </>
       ),
-      position: { top: '17%', left: '55%' },
-      boxArea: { top: '10%', left: '49%', width: '11%', height: '12%' },
+      position: { top: '9%', left: '58%' },
+      boxArea: { top: '3%', left: '51%', width: '13.5%', height: '12%' },
       category: 'communication'
     },
     'i2c3': {
@@ -54,41 +73,124 @@ const InteractivePCB = () => {
       description: (
         <>
           <p>I2C bus 3 with Molex Picoclasp connector</p>
-          <div className="component-pinout">
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(i2c3_pinout);
+            }}
+          >
             <img src={i2c3_pinout} alt="I2C-3 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
           </div>
         </>
       ),
-      position: { top: '31%', left: '59%' },
-      boxArea: { top: '25%', left: '53.5%', width: '11%', height: '12%' },
+      position: { top: '26%', left: '64%' },
+      boxArea: { top: '20%', left: '57%', width: '13.5%', height: '12%' },
       category: 'communication'
     },
     'spi': {
       name: 'SPI-1',
-      description: 'SPI bus with SCLK, MISO, MOSI, and 3 chip select lines',
-      position: { top: '17%', left: '69%' },
-      boxArea: { top: '10%', left: '60%', width: '17%', height: '14%' },
+      description: (
+        <>
+          <p>SPI bus with SCLK, MISO, MOSI, and 3 chip select lines</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(spi_pinout);
+            }}
+          >
+            <img src={spi_pinout} alt="SPI-1 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '9%', left: '76%' },
+      boxArea: { top: '0%', left: '66%', width: '20%', height: '15%' },
       category: 'communication'
     },
     'uart1': {
       name: 'UART-1',
-      description: 'UART port 1 with Molex Picoclasp connector',
-      position: { top: '17%', left: '42%' },
-      boxArea: { top: '10%', left: '36%', width: '11%', height: '12%' },
+      description: (
+        <>
+          <p>UART port 1 with Molex Picoclasp connector</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(uart1_pinout);
+            }}
+          >
+            <img src={uart1_pinout} alt="UART-1 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '9%', left: '41%' },
+      boxArea: { top: '3%', left: '34%', width: '13.5%', height: '12%' },
       category: 'communication'
     },
     'uart2': {
       name: 'UART-2',
-      description: 'UART port 2 with Molex Picoclasp connector',
-      position: { top: '31%', left: '49%' },
-      boxArea: { top: '25%', left: '43%', width: '11%', height: '12%' },
+      description: (
+        <>
+          <p>UART port 2 with Molex Picoclasp connector</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(uart2_pinout);
+            }}
+          >
+            <img src={uart2_pinout} alt="UART-2 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '26%', left: '50%' },
+      boxArea: { top: '20%', left: '43%', width: '14%', height: '12%' },
       category: 'communication'
     },
     'can-module': {
-      name: 'CAN Module',
-      description: 'MCP2512 CAN controller chip for CAN bus communication',
-      position: { top: '30%', left: '38%' },
-      boxArea: { top: '22%', left: '23.5%', width: '20%', height: '17%' },
+      name: 'CAN-0',
+      description: (
+        <>
+          <p>CAN0 interface for communication over the Controller Area Network bus</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(can0_pinout);
+            }}
+          >
+            <img src={can0_pinout} alt="CAN0 Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),      
+      position: { top: '26%', left: '37%' },
+      boxArea: { top: '20%', left: '31%', width: '11%', height: '12%' },
       category: 'communication'
     },
 
@@ -105,27 +207,63 @@ const InteractivePCB = () => {
     'signal-leds': {
       name: 'Signal LEDs',
       description: 'Status LEDs: 5V, 3V3, PWR, ACT, and programmable LED',
-      position: { top: '72%', left: '39%' },
-      boxArea: { top: '68%', left: '35.5%', width: '6%', height: '18%' },
+      position: { top: '82%', left: '37.25%' },
+      boxArea: { top: '74%', left: '33%', width: '7%', height: '24%' },
       category: 'features'
     },
     'fan-port': {
       name: 'Fan Port',
-      description: 'Cooling fan connector',
-      position: { top: '83%', left: '48%' },
-      boxArea: { top: '75%', left: '42%', width: '11%', height: '12%' },
+      description: (
+        <>
+          <p>Cooling fan connector (5V)</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(fan_pinout);
+            }}
+          >
+            <img src={fan_pinout} alt="Fan Port Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '93%', left: '49%' },
+      boxArea: { top: '86%', left: '42%', width: '13.5%', height: '12%' },
       category: 'features'
     },
     'test-pad': {
       name: 'Test Pads',
       description: 'Test pads for 5V and 3.3V outputs',
-      position: { top: '59%', left: '48%' },
-      boxArea: { top: '54%', left: '44%', width: '9%', height: '12%' },
+      position: { top: '64%', left: '50%' },
+      boxArea: { top: '56%', left: '44%', width: '11%', height: '16%' },
       category: 'features'
     },
     'rpi-boot-jumper': {
       name: 'RPi Boot Jumper',
-      description: 'Puts RPi CM5 into eMMC storage mode for flashing',
+      description: (
+        <>
+          <p>Boot mode jumper for flashing CM5 via USB (eMMC mode)</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(rpiboot_pinout);
+            }}
+          >
+            <img src={rpiboot_pinout} alt="RPi Boot Jumper Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
       position: { top: '82%', left: '75%' },
       boxArea: { top: '76%', left: '71%', width: '6%', height: '11%' },
       category: 'features'
@@ -139,9 +277,27 @@ const InteractivePCB = () => {
     },
     'gpio-headers': {
       name: 'GPIO Headers',
-      description: '6x GPIO pins for general purpose I/O connections and testing',
-      position: { top: '17%', left: '29%' },
-      boxArea: { top: '10%', left: '21%', width: '15.5%', height: '13%' },
+      description: (
+        <>
+          <p>6x GPIO header for prototyping and signal breakout</p>
+          <div 
+            className="component-pinout"
+            onClick={(e) => {
+              e.stopPropagation();
+              setEnlargedImage(GPIOheaders_pinout);
+            }}
+          >
+            <img src={GPIOheaders_pinout} alt="GPIO Headers Pinout" className="pinout-image" />
+            <div className="enlarge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h6v6M14 10l7-7M9 21H3v-6M10 14l-7 7" />
+              </svg>
+            </div>
+          </div>
+        </>
+      ),
+      position: { top: '9%', left: '24%' },
+      boxArea: { top: '1%', left: '14%', width: '20%', height: '15%' },
       category: 'features'
     },
 
@@ -156,8 +312,8 @@ const InteractivePCB = () => {
     'usb-c': {
       name: 'USB-C Port',
       description: 'USB-C data ports for high-speed data transfer between devices',
-      position: { top: '35%', left: '18%' },
-      boxArea: { top: '22%', left: '11%', width: '12%', height: '50%' },
+      position: { top: '30%', left: '10%' },
+      boxArea: { top: '18%', left: '1%', width: '16%', height: '58%' },
       category: 'components'
     }
   };
@@ -210,13 +366,28 @@ const InteractivePCB = () => {
 
     // Special positioning for other bottom-right components
     if (markerTop > 50 && markerLeft > 50) {
-      position.top = `${Math.max(5, boxTop - 10)}%`;
-      position.left = `${Math.max(5, boxLeft - 35)}%`;
+      if (component.name === 'RPi Boot Jumper') {
+        position.top = `${Math.max(5, boxTop - 55)}%`;
+        position.left = `${Math.max(5, boxLeft - 35)}%`;
+      } else {
+        position.top = `${Math.max(5, boxTop - 10)}%`;
+        position.left = `${Math.max(5, boxLeft - 35)}%`;
+      }
       return position;
     }
 
+    if (component.name === 'Fan Port'){
+      position.top = `${Math.max(5, boxTop - 55)}%`;
+      position.left = `${Math.max(5, boxLeft - 35)}%`;
+    }
+
     if (boxTop < 50) {
-      position.top = `${boxTop + boxHeight + 5}%`;
+      if (component.name === 'USB-C Port') {
+        position.top = `${Math.max(5, boxTop - 20)}%`;
+        position.left = `${Math.max(5, boxLeft - 35)}%`;
+      } else {
+        position.top = `${boxTop + boxHeight + 5}%`;
+      }
     } else {
       position.top = `${Math.max(5, boxTop - 25)}%`;
     }
@@ -300,10 +471,25 @@ const InteractivePCB = () => {
   };
 
   return (
-    <div className="interactive-pcb" onClick={handleBackgroundClick}>
-      {renderPCBView(frontComponents, pcbFrontImage, 'Front of Interface Board', 'front')}
-      {renderPCBView(backComponents, pcbBackImage, 'Back of Interface Board', 'back')}
-    </div>
+    <>
+      <div className="interactive-pcb" onClick={handleBackgroundClick}>
+        {renderPCBView(frontComponents, pcbFrontImage, 'Front View', 'front')}
+        {renderPCBView(backComponents, pcbBackImage, 'Back View', 'back')}
+      </div>
+      {enlargedImage && (
+        <div 
+          className="enlarged-overlay"
+          onClick={() => setEnlargedImage(null)}
+        >
+          <img 
+            src={enlargedImage} 
+            alt="Enlarged Pinout"
+            className="enlarged-image"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
