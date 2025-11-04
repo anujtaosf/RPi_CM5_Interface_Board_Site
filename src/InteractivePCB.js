@@ -198,8 +198,8 @@ const InteractivePCB = () => {
     'power-input': {
       name: '15-60V Input',
       description: 'XT30 connector for 15-60V input power from battery',
-      position: { top: '36%', left: '80%' },
-      boxArea: { top: '25%', left: '64%', width: '22%', height: '22%' },
+      position: { top: '34%', left: '91%' },
+      boxArea: { top: '18%', left: '73%', width: '26%', height: '31%' },
       category: 'psu'
     },
 
@@ -238,7 +238,7 @@ const InteractivePCB = () => {
     },
     'test-pad': {
       name: 'Test Pads',
-      description: 'Test pads for 5V and 3.3V outputs',
+      description: 'Test pads for 5V and 3.3V outputs <em>(see features section for details)</em>',
       position: { top: '64%', left: '50%' },
       boxArea: { top: '56%', left: '44%', width: '11%', height: '16%' },
       category: 'features'
@@ -264,15 +264,15 @@ const InteractivePCB = () => {
           </div>
         </>
       ),
-      position: { top: '82%', left: '75%' },
-      boxArea: { top: '76%', left: '71%', width: '6%', height: '11%' },
+      position: { top: '91%', left: '83.5%' },
+      boxArea: { top: '83%', left: '80%', width: '7%', height: '16%' },
       category: 'features'
     },
     'rpi-power-button': {
       name: 'RPi Power Button',
       description: 'Power on/off toggle switch for safe RPi shutdown',
-      position: { top: '82%', left: '58.5%' },
-      boxArea: { top: '75%', left: '53%', width: '11%', height: '12%' },
+      position: { top: '92%', left: '63%' },
+      boxArea: { top: '85.5%', left: '56%', width: '14%', height: '12%' },
       category: 'features'
     },
     'gpio-headers': {
@@ -305,8 +305,8 @@ const InteractivePCB = () => {
     'imu': {
       name: 'IMU',
       description: 'Inertial Measurement Unit for motion and orientation sensing',
-      position: { top: '57%', left: '56%' },
-      boxArea: { top: '51%', left: '52%', width: '7%', height: '14%' },
+      position: { top: '59.5%', left: '59%' },
+      boxArea: { top: '53%', left: '54.5%', width: '8%', height: '12%' },
       category: 'components'
     },
     'usb-c': {
@@ -459,7 +459,17 @@ const InteractivePCB = () => {
               <h3 style={{ color: getCategoryColor(components[activeComponent.replace(`${viewId}-`, '')].category) }}>
                 {components[activeComponent.replace(`${viewId}-`, '')].name}
               </h3>
-              <p>{components[activeComponent.replace(`${viewId}-`, '')].description}</p>
+              <div className="component-description">
+                {typeof components[activeComponent.replace(`${viewId}-`, '')].description === 'string' ? (
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: components[activeComponent.replace(`${viewId}-`, '')].description,
+                    }}
+                  ></p>
+                ) : (
+                  components[activeComponent.replace(`${viewId}-`, '')].description
+                )}
+              </div>
               <span className="component-category">
                 {components[activeComponent.replace(`${viewId}-`, '')].category.toUpperCase()}
               </span>

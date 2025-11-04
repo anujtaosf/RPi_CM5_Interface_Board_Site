@@ -575,11 +575,12 @@ body {
   margin: 0.5rem 0 0 0;
   padding: 0;
 }
-.spec-note {
+.specs-list .spec-note {
+  display: block;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.6;
   font-style: italic;
   color: var(--osl-text-medium);
-  margin: 0.25rem 0 0.75rem 0;
-  display: block;
 }
 
 .spec-item {

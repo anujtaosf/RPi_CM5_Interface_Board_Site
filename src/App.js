@@ -365,7 +365,7 @@ function FeaturesSection() {
       description: {
         type: "specs",
         content: [
-          "Use the GND pin on J3 when measuring voltages at test points.",
+          "Use the GND pin on J3 when measuring voltages",
           { label: "TP1", value: "3.3V rail" },
           { label: "TP2", value: "5V rail" },
         ],
