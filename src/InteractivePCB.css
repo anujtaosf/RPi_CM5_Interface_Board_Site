@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding-bottom: 12rem;
 }
 
 .pcb-view-label {
@@ -207,6 +208,10 @@
 @media (max-width: 768px) {
   .pcb-container {
     max-width: 100%;
+  }
+
+  .pcb-view-section {
+    padding-bottom: 2rem;
   }
 
   .component-info {

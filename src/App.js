@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import InteractivePCB from "./InteractivePCB";
 import mechanicalSpecs from "./mechanical_specs.png";
+import datasheetPDF from "./RPi_CM5_interface_board_v.1.0.0_ Datasheet.pdf";
+import schematicPDF from "./RPi_CM_interface_board_v.1.0.0_Schematic.pdf";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <QuickStart />
         <MechanicalSpecifications />
         <HardwareRecommendations />
+        <Archive />
       </main>
     </div>
   );
@@ -35,6 +38,25 @@ function Header() {
 }
 
 function About() {
+  const handleDownload = (pdfUrl, fileName) => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const scrollToArchive = () => {
+    const archiveSection = document.getElementById('archive');
+    if (archiveSection) {
+      archiveSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section className="section osl-card" id="about">
       <h2>About</h2>
@@ -45,6 +67,33 @@ function About() {
         robotics applications. It is built and tested by researchers at the
         University of Michigan's Neurobionics Lab.
       </p>
+      <div className="download-buttons-container">
+        <button
+          className="download-button"
+          onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_Datasheet.pdf')}
+        >
+          <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Datasheet
+        </button>
+        <button
+          className="download-button"
+          onClick={() => handleDownload(schematicPDF, 'RPi_CM5_Interface_Board_Schematic.pdf')}
+        >
+          <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Schematic
+        </button>
+      </div>
+      <button className="see-older-versions-about" onClick={scrollToArchive}>
+        See older versions ↓
+      </button>
     </section>
   );
 }
@@ -603,6 +652,117 @@ function HardwareRecommendations() {
             </div>
           </div>
         </div>
+      )}
+    </section>
+  );
+}
+
+function Archive() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleDownload = (pdfUrl, fileName) => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <section className="section osl-card" id="archive" ref={(el) => { if (el) el.scrollMarginTop = '100px'; }}>
+      <div className="quickstart-header">
+        <h2>Archive</h2>
+        <button
+          className="expand-button"
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+        >
+          <span className={`expand-icon ${expanded ? "expanded" : ""}`}>▼</span>
+        </button>
+      </div>
+
+      {expanded && (
+        <>
+          <p>Version history and changelog for the RPi CM5 Interface Board:</p>
+          <table className="archive-table">
+            <thead>
+              <tr>
+                <th>Version</th>
+                <th>Release Date</th>
+                <th>Changes</th>
+                <th>Datasheet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>v1.1.0</strong>
+                </td>
+                <td>December 2025</td>
+                <td>
+                  <div className="changelog-content">
+                    <strong>New Features:</strong>
+                    <ul>
+                      <li>Added CAN bus support</li>
+                      <li>RGB LED now enabled</li>
+                      <li>RTC pulled up to remain on when Pi is powered off</li>
+                    </ul>
+                    <strong>Changes:</strong>
+                    <ul>
+                      <li>Modified I2C port configuration</li>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <span className="coming-soon">Coming Soon</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>v1.0.0</strong>
+                </td>
+                <td>October 2025</td>
+                <td>
+                  <div className="changelog-content">
+                    <strong>New Features:</strong>
+                    <ul>
+                      <li>Programmable RGB LED port</li>
+                      <li>IMU integration</li>
+                      <li>Multiple SPI chip selects</li>
+                      <li>GPIO pin breakouts</li>
+                      <li>New OSL symbol</li>
+                    </ul>
+                    <strong>Fixes:</strong>
+                    <ul>
+                      <li>Reduced LED brightness</li>
+                      <li>SD card functionality restored</li>
+                      <li>Improved thermal management</li>
+                      <li>Added flipped USB-C support</li>
+                      <li>3.3V line enable</li>
+                    </ul>
+                  </div>
+                </td>
+                <td>
+                  <button
+                    className="download-button"
+                    onClick={() => handleDownload(datasheetPDF, 'RPi_CM5_Interface_Board_Datasheet.pdf')}
+                  >
+                    <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Datasheet
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </>
       )}
     </section>
   );

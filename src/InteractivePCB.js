@@ -275,6 +275,13 @@ const InteractivePCB = () => {
       boxArea: { top: '85.5%', left: '56%', width: '14%', height: '12%' },
       category: 'features'
     },
+    'external-switch': {
+      name: 'External Switch for RPi Power Button',
+      description: 'Port to connect an external switch to the RPi Power Button',
+      position: { top: '92%', left: '75%' },
+      boxArea: { top: '85.5%', left: '70%', width: '10%', height: '11.5%' },
+      category: 'features'
+    },
     'gpio-headers': {
       name: 'GPIO Headers',
       description: (
@@ -376,14 +383,14 @@ const InteractivePCB = () => {
       return position;
     }
 
-    if (component.name === 'Fan Port'){
-      position.top = `${Math.max(5, boxTop - 55)}%`;
+    if (component.name === 'Fan Port' || component.name === 'External Switch for RPi Power Button'){
+      position.top = `${Math.max(5, boxTop - 15)}%`;
       position.left = `${Math.max(5, boxLeft - 35)}%`;
     }
 
     if (boxTop < 50) {
       if (component.name === 'USB-C Port') {
-        position.top = `${Math.max(5, boxTop - 20)}%`;
+        position.top = `${Math.max(5, boxTop - 50)}%`;
         position.left = `${Math.max(5, boxLeft - 35)}%`;
       } else {
         position.top = `${boxTop + boxHeight + 5}%`;
